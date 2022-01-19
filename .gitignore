@@ -1,3 +1,5 @@
+**/settings/local.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -5,6 +7,8 @@ __pycache__/
 
 # C extensions
 *.so
+
+leavestracker/apps/employees/constants.py
 
 # Distribution / packaging
 .Python
@@ -57,7 +61,7 @@ coverage.xml
 
 # Django stuff:
 *.log
-local_settings.py
+local.py
 db.sqlite3
 db.sqlite3-journal
 
@@ -67,6 +71,16 @@ instance/
 
 # Scrapy stuff:
 .scrapy
+
+# Developer
+.pydevproject
+.project
+.settings/
+.idea/
+.DS_Store
+*~
+*-local.scss
+dump.rdb
 
 # Sphinx documentation
 docs/_build/
