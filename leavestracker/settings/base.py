@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'leavestracker.apps.employees',
     'corsheaders',
     'rest_framework',
+    'leavestracker.apps.leaves',
 ]
 
 REST_FRAMEWORK = {
