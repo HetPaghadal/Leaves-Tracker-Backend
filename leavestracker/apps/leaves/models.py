@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils.timezone import datetime
 from leavestracker.apps.employees.models import CustomUser
+from leavestracker.apps.leaves import constants as const
 
 class Leaves(models.Model):
     user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
@@ -13,7 +14,11 @@ class Leaves(models.Model):
     reason = models.CharField(max_length = 30, null = True)
 
     def clean(self):
+        error = []
         if self.start_date>self.end_date:
-            raise ValidationError('Invalid Date')
-        if Leaves.objects.filter(Q(user_id=self.user) & Q(Q(Q(start_date__gte=self.start_date) & Q(start_date__lte=self.end_date)) | Q(Q(end_date__gte=self.start_date)& Q(end_date__lte=self.end_date)))).exists():
-            raise ValidationError('Entry Exist')
+            error.append(const.INVALID_DATE_RAISE_ERROR)
+        if Leaves.objects.filter(Q(user_id=self.user_id) & (Q(start_date__range=[self.start_date,self.end_date]) | Q(end_date__range=[self.start_date,self.end_date]))).exists():
+            error.append(const.DUPLICATE_LEAVE_RAISE_ERROR)
+
+        if error:
+            raise ValidationError(error)

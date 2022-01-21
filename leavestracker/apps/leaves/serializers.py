@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from leavestracker.apps.leaves.models import Leaves
 from rest_framework import serializers
 
@@ -11,4 +10,4 @@ class LeavesSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         instance = Leaves(**attrs)
         instance.clean()
-        return attrs
+        return

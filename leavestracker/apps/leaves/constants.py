@@ -1,9 +1,8 @@
 DEFAULT_ERROR="Something went wrong!"
-SUCCESS_MSG="Leave Add Successfully"
-DUPLICATE_ENTRY_ERROR="{'non_field_errors': [ErrorDetail(string='Entry Exist', code='invalid')]}"
-DUPLICATE_ENTRY_MSG="ALREADY_EXISTS_LEAVE_CONFLICT"
+LEAVE_SUCCESS_MSG="your leave has been added successfully"
+DUPLICATE_LEAVE_RAISE_ERROR="Entry Exist"
+DUPLICATE_LEAVE_ERROR="{'non_field_errors': [ErrorDetail(string='Entry Exist', code='invalid')]}"
+DUPLICATE_LEAVE_MSG="Not added: leaves conflict with already added leaves"
+INVALID_DATE_RAISE_ERROR="Invalid Date"
 INVALID_DATE_ERROR="{'non_field_errors': [ErrorDetail(string='Invalid Date', code='invalid')]}"
-INVALID_DATE_MSG="INVALID_DATE"
-
-
-
+INVALID_DATE_MSG="Not Added: end date should be after start date"
