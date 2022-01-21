@@ -10,4 +10,4 @@ class LeavesSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         instance = Leaves(**attrs)
         instance.clean()
-        return
+        return attrs
