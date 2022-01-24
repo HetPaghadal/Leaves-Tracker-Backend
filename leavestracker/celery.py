@@ -1,15 +1,23 @@
-import os
+from __future__ import absolute_import, unicode_literals
 
 from celery import Celery
-from django.conf import settings
+from datetime import datetime, timedelta
 
-# set the default Django settings module for the 'celery' program.
+import os
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "leavestracker.settings.local")
 
-app = Celery("leavestracker")
-task = app.task
+app = Celery('leavestracker')
 
-# Using a string here means the worker will not have to
-# pickle the object when using Windows.
-app.config_from_object("django.conf:settings", namespace="CELERY")
-app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
+app.config_from_object('django.conf:settings', namespace='CELERY')
+
+app.conf.beat_schedule = {
+    'add-every-10-seconds': {
+        'task': 'leavestracker.apps.leaves.tasks.send_notification',
+        'schedule': 10,
+    }
+}
+
+app.conf.timezone = 'UTC'
+
+app.autodiscover_tasks()

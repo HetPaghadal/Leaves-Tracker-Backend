@@ -6,24 +6,43 @@ from leavestracker.apps.leaves.models import Leaves
 from leavestracker.apps.leaves.serializers import LeavesSerializer
 from leavestracker.apps.employees.models import CustomUser
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+import datetime
 
 class LeavesView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     serializer_class = LeavesSerializer
 
     def get(self, request):
+        today = datetime.date.today()
         if "date" in request.GET:
             queryset = Leaves.objects.filter(
                 start_date__lte=request.GET["date"], end_date__gte=request.GET["date"]
             )
         else:
-            queryset = Leaves.objects.all()
+            queryset = Leaves.objects.filter(
+                end_date__gte=today
+            ).order_by('start_date')
         (data, response_status) = (
             LeavesSerializer(instance=queryset, many=True).data,
             status.HTTP_200_OK,
         )
+
+        data = []
+        for e in queryset:
+            object = {}
+            object['name'] = e.user.first_name + ' ' + e.user.last_name
+            object['start_date'] = e.start_date
+            object['end_date'] = e.end_date
+            object['reason'] = e.reason
+            data.append(object)
+
         return Response(data, response_status)
 
     def post(self, request):

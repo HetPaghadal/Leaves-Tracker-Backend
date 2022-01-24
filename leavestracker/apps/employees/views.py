@@ -4,6 +4,7 @@ from leavestracker.apps.employees.models import CustomUser
 from leavestracker.apps.employees.serializers import CustomEmployeesSerializer
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 
 
@@ -17,16 +18,25 @@ class EmployeesView(APIView):
         try:
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
-                (data, response_status) = (serializer.data, status.HTTP_201_CREATED)
+
+                user = CustomUser.object.get(email=serializer.data['email'])
+                token_obj , _ = Token.objects.get_or_create(user=user)
+                data = {
+                    'detail' : serializer.data,
+                    'Token' : str(token_obj)
+                }
+                (data, response_status) = (data, status.HTTP_201_CREATED)
         except Exception as exc:
             if str(exc) == const.USERNAME_VALID_ERROR_MSG:
-                queryset = CustomUser.objects.filter(
-                    username=serializer.data["username"]
+                user = CustomUser.objects.filter(
+                    email=request.data['email']
                 ).first()
-                (data, response_status) = (
-                    CustomEmployeesSerializer(instance=queryset).data,
-                    status.HTTP_200_OK,
-                )
+                token_obj, _ = Token.objects.get_or_create(user=user)
+                data = {
+                    'detail' : CustomEmployeesSerializer(instance=user).data,
+                    'Token' : str(token_obj)
+                }
+                (data, response_status) = (data, status.HTTP_200_OK)
             else:
                 (data, response_status) = (
                     const.DEFAULT_ERROR,
