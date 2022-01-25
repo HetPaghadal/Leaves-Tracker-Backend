@@ -1,3 +1,6 @@
+**/settings/local.py
+**Pipfile
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -57,7 +60,7 @@ coverage.xml
 
 # Django stuff:
 *.log
-local_settings.py
+local.py
 db.sqlite3
 db.sqlite3-journal
 
@@ -67,6 +70,16 @@ instance/
 
 # Scrapy stuff:
 .scrapy
+
+# Developer
+.pydevproject
+.project
+.settings/
+.idea/
+.DS_Store
+*~
+*-local.scss
+dump.rdb
 
 # Sphinx documentation
 docs/_build/
