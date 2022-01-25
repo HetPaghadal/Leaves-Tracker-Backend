@@ -29,21 +29,9 @@ class LeavesView(APIView):
             queryset = Leaves.objects.filter(
                 end_date__gte=today
             ).order_by('start_date')
-        (data, response_status) = (
-            LeavesSerializer(instance=queryset, many=True).data,
-            status.HTTP_200_OK,
-        )
 
-        data = []
-        for e in queryset:
-            object = {}
-            object['name'] = e.user.first_name + ' ' + e.user.last_name
-            object['start_date'] = e.start_date
-            object['end_date'] = e.end_date
-            object['reason'] = e.reason
-            data.append(object)
-
-        return Response(data, response_status)
+        data = LeavesSerializer(instance=queryset, many=True).data
+        return Response(data, status.HTTP_200_OK)
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -55,15 +43,22 @@ class LeavesView(APIView):
                     status.HTTP_201_CREATED,
                 )
         except Exception as exc:
+            print(exc)
             if str(exc) == const.DUPLICATE_LEAVE_ERROR:
-                (data, response_status) = (
-                    const.DUPLICATE_LEAVE_MSG,
-                    status.HTTP_409_CONFLICT,
-                )
+                if request.data['start_date'] == request.data['end_date']:
+                    (data, response_status) = (
+                        const.DUPLICATE_LEAVE_MSG,
+                        status.HTTP_202_ACCEPTED,
+                    )
+                else :
+                    (data, response_status) = (
+                        const.DUPLICATE_LEAVES_MSG,
+                        status.HTTP_202_ACCEPTED,
+                    )
             elif str(exc) == const.INVALID_DATE_ERROR:
                 (data, response_status) = (
                     const.INVALID_DATE_MSG,
-                    status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    status.HTTP_202_ACCEPTED,
                 )
             else:
                 (data, response_status) = (

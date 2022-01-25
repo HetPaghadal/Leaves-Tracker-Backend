@@ -4,8 +4,8 @@ from django.utils.timezone import datetime
 
 
 class CustomUser(AbstractUser):
-    Created_date = models.DateField(blank=True, null=True)
-    Updated_date = models.DateField(blank=True, null=True)
+    created_date = models.DateField(blank=True, null=True)
+    updated_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.email

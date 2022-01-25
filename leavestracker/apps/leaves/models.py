@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.utils.timezone import datetime
 from leavestracker.apps.employees.models import CustomUser
 from leavestracker.apps.leaves import constants as const
+from leavestracker.settings import local
 
 import datetime
 import json
@@ -29,7 +30,7 @@ class Leaves(models.Model):
             raise ValidationError(error)
 
     @classmethod
-    def get_today_leaves(self):
+    def get_leaves_for_today(cls):
         today = datetime.date.today()
 
         queryset = self.objects.filter(
@@ -38,20 +39,18 @@ class Leaves(models.Model):
         return queryset
 
     @classmethod
-    def create_message(self, Data):
+    def create_slack_notification(cls, Data):
         message = 'Today Leaves :'
         for x in Data:
             message = message + '\n'
-            message = message + str(x.user.first_name) + ' ' + str(x.user.last_name)+ ' (Reason:' + str(x.reason) + ')'
+            message = message + str(x.user.first_name) + ' ' + str(x.user.last_name)+ ' ' + str(x.user.email) + ' ' + ' (Reason:' + str(x.reason) + ')'
 
         payload = {
             "text": message
         }
-
-        url = 'https://hooks.slack.com/services/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'
-        response = requests.post(url, data=json.dumps(payload))
+        response = requests.post(local.Slack_Url, data=json.dumps(payload))
 
     @classmethod
-    def send_notification(self):
-        queryset = self.get_today_leaves()
-        self.create_message(queryset)
+    def send_notification(cls):
+        queryset = self.get_leaves_for_today()
+        self.create_slack_notification(queryset)

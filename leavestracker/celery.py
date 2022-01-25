@@ -12,9 +12,9 @@ app = Celery('leavestracker')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.conf.beat_schedule = {
-    'add-every-10-seconds': {
+    'add-every-morning  ': {
         'task': 'leavestracker.apps.leaves.tasks.send_notification',
-        'schedule': crontab(minute=42 , hour=17),
+        'schedule': crontab(minute=0 , hour=9),
     }
 }
 
