@@ -22,3 +22,6 @@ DATABASES = {
         "PORT": "5432",
     },
 }
+
+#Slack
+SLACK_URL = '<Slack webhook url for post message on channel>'
