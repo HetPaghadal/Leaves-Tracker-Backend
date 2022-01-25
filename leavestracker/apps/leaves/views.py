@@ -34,7 +34,6 @@ class LeavesView(APIView):
         return Response(data, status.HTTP_200_OK)
 
     def post(self, request):
-        print(request.data)
         serializer = self.serializer_class(data=request.data)
         try:
             if serializer.is_valid(raise_exception=True):
@@ -44,7 +43,6 @@ class LeavesView(APIView):
                     status.HTTP_201_CREATED,
                 )
         except Exception as exc:
-            print(exc)
             if str(exc) == const.DUPLICATE_LEAVE_ERROR:
                 if request.data['start_date'] == request.data['end_date']:
                     (data, response_status) = (

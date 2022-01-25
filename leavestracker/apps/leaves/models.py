@@ -23,7 +23,7 @@ class Leaves(models.Model):
         error = []
         if self.start_date>self.end_date:
             error.append(const.INVALID_DATE_RAISE_ERROR)
-        if Leaves.objects.filter( Q(user_id=self.user_id) &(Q(start_date__range=[self.start_date,self.end_date]) | Q(end_date__range=[self.start_date,self.end_date]))).exists():
+        if Leaves.objects.filter(Q(user_id=self.user_id) & (Q(start_date__range=[self.start_date,self.end_date]) | Q(end_date__range=[self.start_date,self.end_date]))).exists():
             error.append(const.DUPLICATE_LEAVE_RAISE_ERROR)
 
         if error:
@@ -33,14 +33,14 @@ class Leaves(models.Model):
     def get_leaves_for_today(cls):
         today = datetime.date.today()
 
-        queryset = Leaves.objects.filter(
+        queryset = cls.objects.filter(
             start_date__lte=today, end_date__gte=today
         )
         return queryset
 
     @classmethod
     def create_slack_notification(cls, Data):
-        message = 'Folks on leave today :'
+        message = const.SLACK_MSG_HEADER
         for x in Data:
             message = message + '\n'
             message = message + str(x.user.first_name) + ' ' + str(x.user.last_name)+ ' ' + str(x.user.email) + ' ' + ' (Reason:' + str(x.reason) + ')'
@@ -52,5 +52,5 @@ class Leaves(models.Model):
 
     @classmethod
     def send_notification(cls):
-        queryset = Leaves.get_leaves_for_today()
-        Leaves.create_slack_notification(queryset)
+        queryset = cls.get_leaves_for_today()
+        cls.create_slack_notification(queryset)
