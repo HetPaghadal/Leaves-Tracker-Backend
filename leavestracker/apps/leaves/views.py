@@ -1,10 +1,7 @@
-from django.core.exceptions import ValidationError
 from django.http import HttpResponse
-from django.shortcuts import render
 from leavestracker.apps.leaves import constants as const
 from leavestracker.apps.leaves.models import Leaves
 from leavestracker.apps.leaves.serializers import LeavesSerializer
-from leavestracker.apps.employees.models import CustomUser
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated

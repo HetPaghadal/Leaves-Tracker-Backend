@@ -39,11 +39,11 @@ class Leaves(models.Model):
         return queryset
 
     @classmethod
-    def create_slack_notification(cls, Data):
+    def create_slack_notification(cls, data):
         message = const.SLACK_MSG_HEADER
-        for x in Data:
+        for leave in data:
             message = message + '\n'
-            message = message + str(x.user.first_name) + ' ' + str(x.user.last_name)+ ' ' + str(x.user.email) + ' ' + ' (Reason:' + str(x.reason) + ')'
+            message = message + str(leave.user.first_name) + ' ' + str(leave.user.last_name)+ ' ' + str(leave.user.email) + ' ' + ' (Reason:' + str(leave.reason) + ')'
 
         payload = {
             "text": message
