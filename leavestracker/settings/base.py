@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-%6e7u&unhgip#%a2ayqy@g!4fr&$q^*_4+_ac-2d+r93pjci(9"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://leave-tracker1.herokuapp.com/" , "localhost"]
 
 
 # Application definition

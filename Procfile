@@ -1,0 +1,1 @@
+web: gunicorn leavestracker.wsgi --log-file -
