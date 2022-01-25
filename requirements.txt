@@ -23,7 +23,7 @@ django-redis==4.11.0
 django-timezone-field==4.0
 djangorestframework==3.11.0
 djangorestframework-camel-case==1.1.2
-djangorestframework-simplejwt==4.4.0
+djangorestframework-simplejwt==4.5.0
 Fabric3==1.14.post1
 factory_boy==2.12.0
 Faker==4.1.0
