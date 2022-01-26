@@ -25,7 +25,11 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ["leave-tracker1.herokuapp.com/" , "127.0.0.1" , 'localhost']
+=======
+ALLOWED_HOSTS = ["leave-tracker1.herokuapp.com/" , "127.0.0.1", "localhost"]
+>>>>>>> 696082f966c6a9b60e861460f80819fd4ba6accd
 # "https://leave-tracker1.herokuapp.com/" , "127.0.0.1", "0.0.0.0"
 
 
