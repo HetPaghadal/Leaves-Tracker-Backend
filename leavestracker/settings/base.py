@@ -25,7 +25,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["leave-tracker1.herokuapp.com/" , "127.0.0.1"]
+ALLOWED_HOSTS = ["leave-tracker1.herokuapp.com/" , "127.0.0.1" , 'localhost']
 # "https://leave-tracker1.herokuapp.com/" , "127.0.0.1", "0.0.0.0"
 
 
@@ -91,7 +91,9 @@ WSGI_APPLICATION = "leavestracker.wsgi.application"
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+    'https://localhost:3000',
+]
 
 CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
 
