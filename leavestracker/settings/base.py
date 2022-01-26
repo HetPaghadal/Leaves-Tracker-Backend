@@ -20,19 +20,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = "django-insecure-%6e7u&unhgip#%a2ayqy@g!4fr&$q^*_4+_ac-2d+r93pjci(9"
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = ["leave-tracker1.herokuapp.com/" , "127.0.0.1" , 'localhost']
-# "https://leave-tracker1.herokuapp.com/" , "127.0.0.1", "0.0.0.0"
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    "corsheaders",
+    'corsheaders',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -96,7 +96,7 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://localhost:3000',
+    "https://localhost:3000",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -105,6 +105,17 @@ CSRF_TRUSTED_ORIGINS = [
 
 CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
 
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

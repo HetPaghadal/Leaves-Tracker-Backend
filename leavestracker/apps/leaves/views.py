@@ -40,6 +40,7 @@ class LeavesView(APIView):
                     status.HTTP_201_CREATED,
                 )
         except Exception as exc:
+            print(exc)
             if str(exc) == const.DUPLICATE_LEAVE_ERROR:
                 if request.data['start_date'] == request.data['end_date']:
                     (data, response_status) = (
