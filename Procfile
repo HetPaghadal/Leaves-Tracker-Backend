@@ -1,1 +1,1 @@
-web: gunicorn leavestracker.wsgi --log-file -
+web: waitress-serve --port=$PORT leavestracker.wsgi:application
