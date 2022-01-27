@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.sessions",
     "django.contrib.staticfiles",
-    "django_celery_beat",
     "leavestracker.apps.employees",
     "leavestracker.apps.leaves",
     "rest_framework",
