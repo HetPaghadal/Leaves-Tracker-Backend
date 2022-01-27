@@ -9,6 +9,7 @@ from leavestracker.settings import local
 
 import datetime
 import json
+import os
 import requests
 
 class Leaves(models.Model):
@@ -48,7 +49,7 @@ class Leaves(models.Model):
         payload = {
             "text": message
         }
-        response = requests.post(local.SLACK_URL, data=json.dumps(payload))
+        response = requests.post(os.environ.get('SLACK_URL'), data=json.dumps(payload))
 
     @classmethod
     def send_notification(cls):
