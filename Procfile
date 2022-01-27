@@ -1,2 +1,1 @@
-web: waitress-serve --port=$PORT leavestracker.wsgi:application
-manage.py migrate
+web: gunicorn leavestracker.wsgi
