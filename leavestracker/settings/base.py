@@ -29,7 +29,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["leave-tracker1.herokuapp.com/" , "127.0.0.1" , 'localhost']
 
-
 # Application definition
 
 INSTALLED_APPS = [

@@ -1,1 +1,1 @@
-web: gunicorn leavestracker.wsgi
+web:gunicorn leavestracker.wsgi
