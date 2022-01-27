@@ -88,32 +88,10 @@ TEMPLATES = [
 WSGI_APPLICATION = "leavestracker.wsgi.application"
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3000',
-#     # 'http://127.0.0.1:3000',
-# ]
-#
-# CORS_ORIGIN_WHITELIST = [
-#     'https://localhost:3000',
-#     # 'http://127.0.0.1:3000',
-# ]
-#
-# CORS_ALLOWED_ORIGIN_REGEXES = [
-#     r"^https://\w+\.localhost\:3000$",
-#     # r"^https://\w+\.127.0.0.1\:3000$",
-# ]
-#
-# CORS_ALLOWED_ORIGINS = [
-#     'https://localhost:3000',
-#     # 'http://127.0.0.1:3000',
-# ]
-# #
-# CSRF_TRUSTED_ORIGINS = [
-#     'https://localhost:3000',
-#     'http://127.0.0.1:3000',
-# ]
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+)
 
 CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
 
