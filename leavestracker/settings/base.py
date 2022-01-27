@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-%6e7u&unhgip#%a2ayqy@g!4fr&$q^*_4+_ac-2d+r93pjci(9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["leave-tracker1.herokuapp.com/" , "127.0.0.1" , 'localhost']
+ALLOWED_HOSTS = ["leave-tracker1.herokuapp.com", "127.0.0.1", 'localhost']
 
 # Application definition
 
