@@ -1,3 +1,4 @@
+**/settings/local.py
 **Pipfile
 .env
 
@@ -60,6 +61,7 @@ coverage.xml
 
 # Django stuff:
 *.log
+local.py
 db.sqlite3
 db.sqlite3-journal
 
@@ -73,6 +75,7 @@ instance/
 # Developer
 .pydevproject
 .project
+.settings/
 .idea/
 .DS_Store
 *~
