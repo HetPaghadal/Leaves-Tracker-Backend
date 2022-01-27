@@ -1,2 +1,1 @@
-web:gunicorn leavestracker.wsgi
-manage.py migrate
+web: gunicorn leavestracker.wsgi
