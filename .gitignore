@@ -1,5 +1,6 @@
 **/settings/local.py
 **Pipfile
+.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
