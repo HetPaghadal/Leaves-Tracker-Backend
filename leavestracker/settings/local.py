@@ -18,3 +18,5 @@ DATABASES = {
         "PORT": "5432",
     },
 }
+
+SLACK_URL = 'https://hooks.slack.com/services/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'
